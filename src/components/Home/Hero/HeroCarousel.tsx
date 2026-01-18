@@ -97,7 +97,7 @@ const HeroCarousal = () => {
 
           <div>
             <Image
-              src="/images/hero/hero-03.png"
+              src="/images/hero/hero-05.png"
               alt="headphone"
               width={351}
               height={358}
