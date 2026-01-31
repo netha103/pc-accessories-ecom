@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Updated Admin Sidebar to display the website's logo () (@Nethaji)
+
 - Migrated Admin Authentication to use MongoDB with `mongoose`.
 - Created `User` model and seeding script for admin credentials.
 - Updated Admin Sidebar to display the website's logo (`g3-logo.png`).
