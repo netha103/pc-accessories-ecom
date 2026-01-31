@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Configured git remote origin to `https://github.com/netha103/pc-accessories-ecom.git`.
+- Integrated functional Admin Panel based on TailAdmin design.
+- Implemented Authentication system using NextAuth.js.
+- Added Middleware for protecting admin routes (`/admin`).
+- Created dedicated Admin Sign-In page (`/auth/signin`) matching website aesthetics.
+- Secured admin credentials using PBKDF2 hashing in `.env.local`.
+- Added security headers (X-Frame-Options, XSS-Protection, etc.) in `next.config.js`.
 
 ## [0.1.0] - 2026-01-18
 

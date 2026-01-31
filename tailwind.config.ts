@@ -10,9 +10,7 @@ const config: Config = {
   ],
   darkMode: "class",
   theme: {
-    fontFamily: {
-      "euclid-circular-a": ["Euclid Circular A"],
-    },
+
     container: {
       center: true,
       padding: {
@@ -40,6 +38,18 @@ const config: Config = {
         4: "#8D93A5",
         5: "#BBBEC9",
       },
+      primary: "#3C50E0",
+      success: "#2196F3",
+      danger: "#D34053",
+      warning: "#FFA70B",
+      stroke: "#E2E8F0",
+      strokedark: "#2E3A47",
+      boxdark: "#24303F",
+      "boxdark-2": "#1A222C",
+      whiten: "#F1F5F9",
+      bodydark: "#AEB7C0",
+      bodydark1: "#DEE4EE",
+      bodydark2: "#8A99AF",
       gray: {
         DEFAULT: "#F3F5F6",
         1: "#F9FAFB",
@@ -49,6 +59,32 @@ const config: Config = {
         5: "#9CA3AF",
         6: "#6B7280",
         7: "#374151",
+        // TailAdmin Gray Scale
+        25: "#fcfcfd",
+        50: "#f9fafb",
+        100: "#f2f4f7",
+        200: "#e4e7ec",
+        300: "#d0d5dd",
+        400: "#98a2b3",
+        500: "#667085",
+        600: "#475467",
+        700: "#344054",
+        800: "#1d2939",
+        900: "#101828",
+        950: "#0c111d",
+      },
+      indigo: {
+        50: "#ecf3ff",
+        100: "#dde9ff",
+        200: "#c2d6ff",
+        300: "#9cb9ff",
+        400: "#7592ff",
+        500: "#465fff",
+        600: "#3641f5",
+        700: "#2a31d8",
+        800: "#252dae",
+        900: "#262e89",
+        950: "#161950",
       },
       blue: {
         DEFAULT: "#3C50E0",
@@ -104,6 +140,9 @@ const config: Config = {
       ...defaultTheme.screens,
     },
     extend: {
+      fontFamily: {
+        "euclid-circular-a": ["Euclid Circular A"],
+      },
       fontSize: {
         "2xs": ["10px", "17px"],
         "heading-1": ["60px", "72px"],

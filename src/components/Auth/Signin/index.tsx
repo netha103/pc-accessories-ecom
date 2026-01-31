@@ -1,8 +1,33 @@
+"use client";
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Signin = () => {
+  const router = useRouter();
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    setError("");
+    const res = await signIn("credentials", {
+      ...data,
+      redirect: false,
+    });
+
+    if (res?.error) {
+      setError("Invalid email or password");
+    } else {
+      router.push("/admin");
+    }
+  };
+
   return (
     <>
       <Breadcrumb title={"Signin"} pages={["Signin"]} />
@@ -17,7 +42,10 @@ const Signin = () => {
             </div>
 
             <div>
-              <form>
+              <form onSubmit={handleSubmit}>
+                {error && (
+                  <div className="mb-4 text-sm font-medium text-red-500 bg-red-50 p-3 rounded">{error}</div>
+                )}
                 <div className="mb-5">
                   <label htmlFor="email" className="block mb-2.5">
                     Email
@@ -28,6 +56,8 @@ const Signin = () => {
                     name="email"
                     id="email"
                     placeholder="Enter your email"
+                    value={data.email}
+                    onChange={(e) => setData({ ...data, email: e.target.value })}
                     className="rounded-lg border border-gray-3 bg-gray-1 placeholder:text-dark-5 w-full py-3 px-5 outline-none duration-200 focus:border-transparent focus:shadow-input focus:ring-2 focus:ring-blue/20"
                   />
                 </div>
@@ -43,13 +73,15 @@ const Signin = () => {
                     id="password"
                     placeholder="Enter your password"
                     autoComplete="on"
+                    value={data.password}
+                    onChange={(e) => setData({ ...data, password: e.target.value })}
                     className="rounded-lg border border-gray-3 bg-gray-1 placeholder:text-dark-5 w-full py-3 px-5 outline-none duration-200 focus:border-transparent focus:shadow-input focus:ring-2 focus:ring-blue/20"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full flex justify-center font-medium text-dark bg-dark py-3 px-6 rounded-lg ease-out duration-200 hover:bg-blue mt-7.5"
+                  className="w-full flex justify-center font-medium text-dark bg-dark py-3 px-6 rounded-lg ease-out duration-200 hover:bg-blue mt-7.5 text-white"
                 >
                   Sign in to account
                 </button>
@@ -67,7 +99,7 @@ const Signin = () => {
                 </span>
 
                 <div className="flex flex-col gap-4.5 mt-4.5">
-                  <button className="flex justify-center items-center gap-3.5 rounded-lg border border-gray-3 bg-gray-1 p-3 ease-out duration-200 hover:bg-gray-2">
+                  <button type="button" className="flex justify-center items-center gap-3.5 rounded-lg border border-gray-3 bg-gray-1 p-3 ease-out duration-200 hover:bg-gray-2">
                     <svg
                       width="20"
                       height="20"
@@ -92,7 +124,7 @@ const Signin = () => {
                             fill="#4285F4"
                           />
                           <path
-                            d="M10.2036 20C12.9586 20 15.2715 19.1111 16.9609 17.5777L13.7409 15.1332C12.8793 15.7223 11.7229 16.1333 10.2036 16.1333C8.91317 16.126 7.65795 15.7206 6.61596 14.9746C5.57397 14.2287 4.79811 13.1802 4.39848 11.9777L4.2789 11.9877L1.12906 14.3766L1.08789 14.4888C1.93622 16.1457 3.23812 17.5386 4.84801 18.512C6.45791 19.4852 8.31194 20.0005 10.2036 20Z"
+                            d="M10.2036 20C12.9586 20 15.2715 19.1111 16.9609 17.5777L13.7409 15.1332C12.8793 15.7223 11.7229 16.1333 10.2036 16.1333C8.91317 16.126 7.65795 15.7206 6.61596 14.9746C5.57397 14.2287 4.79811 13.1802 4.39848 11.9777L4.2789 11.9877L1.1927 14.3766L1.15789 14.4888C1.93622 16.1457 3.23812 17.5386 4.84801 18.512C6.45791 19.4852 8.31194 20.0005 10.2036 20Z"
                             fill="#34A853"
                           />
                           <path
@@ -114,7 +146,7 @@ const Signin = () => {
                     Sign In with Google
                   </button>
 
-                  <button className="flex justify-center items-center gap-3.5 rounded-lg border border-gray-3 bg-gray-1 p-3 ease-out duration-200 hover:bg-gray-2">
+                  <button type="button" className="flex justify-center items-center gap-3.5 rounded-lg border border-gray-3 bg-gray-1 p-3 ease-out duration-200 hover:bg-gray-2">
                     <svg
                       width="22"
                       height="22"
