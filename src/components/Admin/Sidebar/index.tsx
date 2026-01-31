@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useSidebar } from "@/context/SidebarContext";
 import {
@@ -53,12 +54,15 @@ const Sidebar: React.FC<SidebarProps> = () => {
             {/* Sidebar Header */}
             <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
                 <Link href="/admin" className="flex items-center gap-2">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 text-white">
-                        <LayoutDashboard size={24} />
-                    </div>
+                    <Image
+                        src="/images/logo/g3-logo.png"
+                        alt="Logo"
+                        width={60}
+                        height={30}
+                    />
                     {(isExpanded || isHovered) && (
                         <span className="text-xl font-bold text-gray-900 dark:text-white">
-                            TailAdmin
+                            G3 Electronics
                         </span>
                     )}
                 </Link>

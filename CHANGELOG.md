@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Migrated Admin Authentication to use MongoDB with `mongoose`.
+- Created `User` model and seeding script for admin credentials.
+- Updated Admin Sidebar to display the website's logo (`g3-logo.png`).
 - Fix: Remove conflicting package-lock.json to resolve Railway security vulnerability (@Nethaji)
 
 - Fix: Remove conflicting package-lock.json to resolve Railway security vulnerability (@Nethaji)
