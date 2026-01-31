@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Fixed logout redirect URL to point to `/auth/signin` instead of localhost.
 - Updated Admin Sidebar to display the website's logo () (@Nethaji)
 
 - Migrated Admin Authentication to use MongoDB with `mongoose`.
