@@ -1,5 +1,7 @@
 import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import connectToDatabase from "@/lib/mongodb";
+import User from "@/models/User";
 import crypto from "crypto";
 
 export const authOptions: AuthOptions = {
@@ -7,43 +9,43 @@ export const authOptions: AuthOptions = {
         CredentialsProvider({
             name: "Credentials",
             credentials: {
-                email: {
-                    label: "Email",
-                    type: "text",
-                    placeholder: "admin@example.com",
-                },
+                email: { label: "Email", type: "text", placeholder: "jsmith@example.com" },
                 password: { label: "Password", type: "password" },
             },
             async authorize(credentials) {
-                if (!credentials?.email || !credentials?.password) return null;
-
-                const storedEmail = process.env.ADMIN_EMAIL;
-                const storedSalt = process.env.ADMIN_PASSWORD_SALT;
-                const storedHash = process.env.ADMIN_PASSWORD_HASH;
-
-                if (!storedEmail || !storedSalt || !storedHash) {
-                    console.error("Admin credentials not set in environment variables");
+                if (!credentials?.email || !credentials?.password) {
                     return null;
                 }
 
-                if (credentials.email !== storedEmail) {
-                    return null;
-                }
+                try {
+                    await connectToDatabase();
 
-                const inputHash = crypto
-                    .pbkdf2Sync(credentials.password, storedSalt, 1000, 64, "sha512")
-                    .toString("hex");
+                    // Explicitly select password and salt
+                    const user = await User.findOne({ email: credentials.email }).select("+password +salt");
 
-                if (inputHash === storedHash) {
+                    if (!user) {
+                        return null;
+                    }
+
+                    // Hash the input password using the stored salt
+                    const inputHash = crypto
+                        .pbkdf2Sync(credentials.password, user.salt, 1000, 64, "sha512")
+                        .toString("hex");
+
+                    if (inputHash !== user.password) {
+                        return null;
+                    }
+
                     return {
-                        id: "1",
-                        name: "Admin User",
-                        email: storedEmail,
-                        role: "admin",
+                        id: user._id.toString(),
+                        name: user.name,
+                        email: user.email,
+                        role: user.role,
                     };
+                } catch (error) {
+                    console.error("Auth error:", error);
+                    return null;
                 }
-
-                return null;
             },
         }),
     ],
