@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 - admin port working (@Nethaji)
+- Fixed deprecated husky hook configuration.
 
 ### Added
 - Configured git remote origin to `https://github.com/netha103/pc-accessories-ecom.git`.
