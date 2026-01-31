@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fix: Remove conflicting package-lock.json to resolve Railway security vulnerability (@Nethaji)
 
+- Fix: Remove conflicting package-lock.json to resolve Railway security vulnerability (@Nethaji)
+
 - admin port working (@Nethaji)
 
 - admin port working (@Nethaji)
